@@ -1,0 +1,6 @@
+- centralizar tudo para melhorar a responsividade em vários tamanhos de tela
+- mudar o lodo do header de escrito pra um logo dinânimo (gif)
+- dark/light mode
+- pt-br/en
+- tags para acessibilidade
+- ajustar css para mobile
