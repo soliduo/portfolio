@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Ícones -->
+  <link rel="icon" type="image/svg+xml" href="/portfolio/logo_soliduo_branco.png" />
+  <link rel="alternate icon" type="image/png" href="/portfolio/logo_soliduo_preto.png" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;600&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Anti-flash de tema: aplica override salvo antes do React carregar -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t === 'light' || t === 'dark') {
+          document.documentElement.setAttribute('data-theme', t);
+        } else {
+          document.documentElement.removeAttribute('data-theme');
+        }
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Cores da barra do navegador (claro/escuro + fallback) -->
+  <meta name="theme-color" content="#F8F6F3" />
+  <meta name="theme-color" content="#0A0A0A" media="(prefers-color-scheme: dark)" />
+
+  <!-- SEO básico -->
+  <title>SoliDuo — Sites que encantam. Automações que vendem.</title>
+  <meta name="description"
+        content="SoliDuo: landing pages, páginas para casamentos, aniversários e eventos, portfólios e automações de WhatsApp com n8n." />
+
+  <!-- Open Graph / Sharing -->
+  <meta property="og:title" content="SoliDuo — Sites que encantam. Automações que vendem." />
+  <meta property="og:description"
+        content="Landing pages, eventos, portfólios e automações de WhatsApp (n8n). Atendemos Brasil todo." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/og.jpg" />
+  <meta property="og:url" content="https://seu-dominio.com/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Fallback sem JS: cor de fundo correta para evitar flash branco -->
+  <noscript>
+    <style>
+      html,body,#root{height:100%}
+      body{background:#F8F6F3;color:#111}
+      @media (prefers-color-scheme: dark){
+        body{background:#0A0A0A;color:#F8F6F3}
+      }
+    </style>
+  </noscript>
+  <script type="module" crossorigin src="/portfolio/assets/index-D0DeHu0a.js"></script>
+  <link rel="stylesheet" crossorigin href="/portfolio/assets/index-ND5VcKqm.css">
+</head>
+<body>
+  <div id="root"></div>
+</body>
+</html>
