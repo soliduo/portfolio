@@ -1,10 +1,25 @@
 import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowRight, CalendarClock, CheckCircle2, Download, ExternalLink, Github, Linkedin,
-  Mail, MessagesSquare, Phone, Sparkles, Sun, Moon, Facebook, Instagram,
+  ArrowRight,
+  CalendarClock,
+  CheckCircle2,
+  Download,
+  ExternalLink,
+  Github,
+  Linkedin,
+  Mail,
+  MessagesSquare,
+  Phone,
+  Sparkles,
+  Sun,
+  Moon,
+  Facebook,
+  Instagram,
 } from "lucide-react";
 import "./index.css";
+import logoLight from '/logo_soliduo_preto.png';
+import logoDark from '/logo_soliduo_branco.png';
 
 const BRAND = {
   name: "SoliDuo",
@@ -18,42 +33,61 @@ const BRAND = {
 };
 
 const SERVICES = [
-  { title: "Landing Pages", badge: "Conversão & SEO",
+  {
+    title: "Landing Pages", badge: "Conversão & SEO",
     desc: "Páginas rápidas, acessíveis e com copy pensada para gerar leads.",
-    bullets: ["Core Web Vitals", "SEO técnico", "Formulários integrados"], },
-  { title: "Páginas de Eventos", badge: "Casamentos, Batizados e Festas",
+    bullets: ["Core Web Vitals", "SEO técnico", "Formulários integrados"],
+  },
+  {
+    title: "Páginas de Eventos", badge: "Casamentos, Batizados e Festas",
     desc: "Convites digitais com RSVP, lista de presentes e mapas.",
-    bullets: ["Tema personalizado", "Confirmação de presença", "Galeria de fotos"], },
-  { title: "Portfólios", badge: "Artistas & Profissionais",
+    bullets: ["Tema personalizado", "Confirmação de presença", "Galeria de fotos"],
+  },
+  {
+    title: "Portfólios", badge: "Artistas & Profissionais",
     desc: "Mostre seu trabalho com elegância e performance.",
-    bullets: ["Grid responsivo", "CMS/Notion opcional", "Blog/Postagens"], },
-  { title: "Automação WhatsApp", badge: "n8n / Agendamentos",
+    bullets: ["Grid responsivo", "CMS/Notion opcional", "Blog/Postagens"],
+  },
+  {
+    title: "Automação WhatsApp", badge: "n8n / Agendamentos",
     desc: "Fluxos automatizados para atendimento e agendar serviços.",
-    bullets: ["Disparo contextual", "Coleta de dados", "Webhook + CRM"], },
+    bullets: ["Disparo contextual", "Coleta de dados", "Webhook + CRM"],
+  },
 ];
 
 const WORKS = [
-  { title: "Landing de Lançamento", desc: "Estrutura enxuta focada em conversão com testes A/B.",
-    stack: ["React","Tailwind"],
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop" },
-  { title: "Convite de Casamento Digital", desc: "Página com RSVP, mapa e lista de presentes integrada.",
-    stack: ["Vite","Tailwind"],
-    img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop" },
-  { title: "Portfólio Fotógrafa", desc: "Grid leve e otimização de imagens em tempo real.",
-    stack: ["React","SSR opcional"],
-    img: "https://images.unsplash.com/photo-1487412912498-0447578fcca8?q=80&w=1600&auto=format&fit=crop" },
+  {
+    title: "Landing de Lançamento", desc: "Estrutura enxuta focada em conversão com testes A/B.",
+    stack: ["React", "Tailwind"],
+    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop"
+  },
+  {
+    title: "Convite de Casamento Digital", desc: "Página com RSVP, mapa e lista de presentes integrada.",
+    stack: ["Vite", "Tailwind"],
+    img: "https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1600&auto=format&fit=crop"
+  },
+  {
+    title: "Portfólio Fotógrafa", desc: "Grid leve e otimização de imagens em tempo real.",
+    stack: ["React", "SSR opcional"],
+    img: "https://images.unsplash.com/photo-1487412912498-0447578fcca8?q=80&w=1600&auto=format&fit=crop"
+  },
 ];
 
 const FLOW = [
-  { icon: <Sparkles className="h-5 w-5" />, title: "Briefing em 30 min",
-    text: "Entendemos objetivo, público e referências. Pode ser por WhatsApp mesmo." },
-  { icon: <CheckCircle2 className="h-5 w-5" />, title: "Protótipo rápido",
-    text: "Você valida visual e conteúdo; ajustamos antes de codar." },
-  { icon: <CalendarClock className="h-5 w-5" />, title: "Entrega express",
-    text: "Landing simples em dias, evento com RSVP em até 1–2 semanas." },
+  {
+    icon: <Sparkles className="h-5 w-5" />, title: "Briefing em 30 min",
+    text: "Entendemos objetivo, público e referências. Pode ser por WhatsApp mesmo."
+  },
+  {
+    icon: <CheckCircle2 className="h-5 w-5" />, title: "Protótipo rápido",
+    text: "Você valida visual e conteúdo; ajustamos antes de codar."
+  },
+  {
+    icon: <CalendarClock className="h-5 w-5" />, title: "Entrega express",
+    text: "Landing simples em dias, evento com RSVP em até 1–2 semanas."
+  },
 ];
 
-/* -------------------- helpers -------------------- */
 function Container({ children }) {
   return <div className="mx-auto w-full max-w-6xl px-5">{children}</div>;
 }
@@ -66,32 +100,31 @@ const normalizeUrl = (u) => {
 const facebookUrl = (val) => /^https?:\/\//i.test(val) ? val : `https://facebook.com/${encodeURIComponent(val)}`;
 const instagramUrl = (val) => /^https?:\/\//i.test(val) ? val : `https://instagram.com/${encodeURIComponent(val)}`;
 
-/* -------------------- tema: system + override manual -------------------- */
-const THEME_MODES = /** @type const */ (["system","light","dark"]);
+const THEME_MODES = /** @type const */ (["system", "light", "dark"]);
 const prefersDark = () =>
   typeof window !== "undefined" &&
   window.matchMedia &&
   window.matchMedia("(prefers-color-scheme: dark)").matches;
 
 function getInitialMode() {
-  try { const saved = localStorage.getItem("theme");
-    if (saved === "light" || saved === "dark") return saved; } catch {}
+  try {
+    const saved = localStorage.getItem("theme");
+    if (saved === "light" || saved === "dark") return saved;
+  } catch { }
   return "system";
 }
 function applyTheme(mode) {
   const root = document.documentElement;
-  if (mode === "system") { root.removeAttribute("data-theme"); try{localStorage.removeItem("theme");}catch{}; }
-  else { root.setAttribute("data-theme", mode); try{localStorage.setItem("theme", mode);}catch{}; }
+  if (mode === "system") { root.removeAttribute("data-theme"); try { localStorage.removeItem("theme"); } catch { }; }
+  else { root.setAttribute("data-theme", mode); try { localStorage.setItem("theme", mode); } catch { }; }
 }
 
 function Nav() {
   const [mode, setMode] = useState(getInitialMode);
-  const [systemDark, setSystemDark] = useState(prefersDark()); // <- acompanha o SO
+  const [systemDark, setSystemDark] = useState(prefersDark());
 
-  // aplica override no <html data-theme>
   useEffect(() => { applyTheme(mode); }, [mode]);
 
-  // quando estamos em "system", ouvir mudanças do SO e re-renderizar
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onChange = (e) => setSystemDark(e.matches);
@@ -102,7 +135,6 @@ function Nav() {
     }
   }, [mode]);
 
-  // tema efetivo (o que de fato está na tela)
   const effectiveTheme = mode === "system" ? (systemDark ? "dark" : "light") : mode;
 
   const icon = effectiveTheme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />;
@@ -120,7 +152,7 @@ function Nav() {
         <nav className="flex h-16 items-center justify-between">
           <div href="#top" className="flex items-center gap-3 text-lg font-extrabold heading">
             <img
-              src={effectiveTheme === "dark" ? "../public/logo_soliduo_preto.png" : "../public/logo_soliduo_branco.png"}
+              src={effectiveTheme === 'dark' ? logoDark : logoLight}
               alt="Logo SoliDuo"
               className="h-6 w-6"
             />
@@ -150,53 +182,6 @@ function Nav() {
   );
 }
 
-// function Nav() {
-//   const [mode, setMode] = useState(getInitialMode);
-//   useEffect(() => { applyTheme(mode); }, [mode]);
-//   useEffect(() => {
-//     if (mode !== "system") return;
-//     const mq = window.matchMedia("(prefers-color-scheme: dark)");
-//     const handler = () => setMode((m) => (m === "system" ? "system" : m));
-//     mq.addEventListener?.("change", handler);
-//     return () => mq.removeEventListener?.("change", handler);
-//   }, [mode]);
-
-//   const icon = useMemo(() => {
-//     if (mode === "light") return <Sun className="h-5 w-5" />;
-//     if (mode === "dark") return <Moon className="h-5 w-5" />;
-//     return prefersDark() ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />;
-//   }, [mode]);
-//   const label = mode === "system" ? "Tema: sistema" : `Tema: ${mode}`;
-//   const cycleMode = () => {
-//     const i = THEME_MODES.indexOf(mode);
-//     setMode(THEME_MODES[(i + 1) % THEME_MODES.length]);
-//   };
-
-//   return (
-//     <header className="sticky top-0 z-50 border-b border-soft bg-[rgb(var(--bg)/0.7)] backdrop-blur">
-//       <Container>
-//         <nav className="flex h-16 items-center justify-between">
-//           <a href="#top" className="flex items-center gap-3 text-lg font-extrabold heading">
-//             <img src="/logo_soliduo_preto.png" alt="Logo SoliDuo" className="h-6 w-6" />
-//             <span>Soli<span className="text-[rgb(var(--brand))]">Duo</span></span>
-//           </a>
-//           <div className="hidden items-center gap-6 md:flex">
-//             <a href="#top" className="hover:opacity-80">Home</a>
-//             <a href="#servicos" className="hover:opacity-80">Serviços</a>
-//             <a href="#eventos" className="hover:opacity-80">Eventos</a>
-//             <a href="#portfolio" className="hover:opacity-80">Portfólio</a>
-//             <a href="#automacao" className="hover:opacity-80">Automação</a>
-//             <a href="#contato" className="hover:opacity-80">Contato</a>
-//             <button onClick={cycleMode} className="rounded p-2 hover:bg-white/5" aria-label={label} title={`${label} (clique para alternar)`}>
-//               {icon}
-//             </button>
-//           </div>
-//         </nav>
-//       </Container>
-//     </header>
-//   );
-// }
-
 function Hero() {
   return (
     <Container>
@@ -221,7 +206,7 @@ function Hero() {
             </a>
           </div>
           <div className="mt-6 flex flex-wrap gap-2">
-            {["React","Tailwind","Java/Spring","Node/TS","n8n","SEO"].map(chip => (
+            {["React", "Tailwind", "Java/Spring", "Node/TS", "n8n", "SEO"].map(chip => (
               <span key={chip} className="chip">{chip}</span>
             ))}
           </div>
@@ -292,7 +277,7 @@ function Events() {
           </div>
           <div className="overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
             <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1640&auto=format&fit=crop"
-                 alt="Página de evento" className="h-full w-full object-cover" loading="lazy" />
+              alt="Página de evento" className="h-full w-full object-cover" loading="lazy" />
           </div>
         </div>
       </section>
@@ -311,7 +296,7 @@ function Portfolio() {
             <article key={p.title} className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
               <div className="relative aspect-video overflow-hidden">
                 <img src={p.img} alt={p.title}
-                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" />
+                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" />
               </div>
               <div className="p-5 bg-[rgb(var(--card))]">
                 <h3 className="heading text-lg font-semibold">{p.title}</h3>
@@ -350,7 +335,7 @@ function Automation() {
               <p className="text-sm text-muted">Cliente escolhe horário pelo WhatsApp, n8n valida disponibilidade e confirma. Integração com Google Calendar/Sheets/CRM.</p>
             </div>
             <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer"
-               className="btn-primary inline-flex items-center gap-2">
+              className="btn-primary inline-flex items-center gap-2">
               <MessagesSquare className="h-4 w-4" /> Falar no WhatsApp
             </a>
           </div>
@@ -374,11 +359,11 @@ function Contact() {
             <h3 className="heading font-semibold">Fale com a SoliDuo</h3>
             <p className="mt-2 text-sm text-muted">Preferimos primeiro contato por e-mail ou WhatsApp. Passamos valores após entender escopo.</p>
             <div className="mt-4 grid gap-2">
-              <a href={`mailto:${BRAND.email}`} className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Mail className="h-4 w-4"/> {BRAND.email}</a>
-              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Phone className="h-4 w-4"/> WhatsApp</a>
-              <a href={linkedinHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Linkedin className="h-4 w-4"/> LinkedIn</a>
-              <a href={facebookHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Facebook className="h-4 w-4"/> Facebook</a>
-              <a href={instagramHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Instagram className="h-4 w-4"/> Instagram</a>
+              <a href={`mailto:${BRAND.email}`} className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Mail className="h-4 w-4" /> {BRAND.email}</a>
+              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Phone className="h-4 w-4" /> WhatsApp</a>
+              <a href={linkedinHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Linkedin className="h-4 w-4" /> LinkedIn</a>
+              <a href={facebookHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Facebook className="h-4 w-4" /> Facebook</a>
+              <a href={instagramHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Instagram className="h-4 w-4" /> Instagram</a>
             </div>
           </div>
           <div className="rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-6 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
@@ -389,7 +374,7 @@ function Contact() {
               <li>• Se já tem domínio/hospedagem e integrações desejadas.</li>
             </ul>
             <a href="#portfolio" className="mt-4 btn-ghost inline-flex items-center gap-2">
-              <Download className="h-4 w-4"/> Ver cases
+              <Download className="h-4 w-4" /> Ver cases
             </a>
           </div>
         </div>
@@ -426,8 +411,8 @@ export default function App() {
           <div className="flex flex-col items-center justify-between gap-3 text-sm text-muted md:flex-row">
             <p>© {new Date().getFullYear()} {BRAND.name}. Feito com React + Tailwind.</p>
             <div className="flex items-center gap-3">
-              <a href={BRAND.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Github className="h-4 w-4"/> GitHub</a>
-              <a href={normalizeUrl(BRAND.linkedin)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Linkedin className="h-4 w-4"/> LinkedIn</a>
+              <a href={BRAND.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Github className="h-4 w-4" /> GitHub</a>
+              <a href={normalizeUrl(BRAND.linkedin)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Linkedin className="h-4 w-4" /> LinkedIn</a>
             </div>
           </div>
         </Container>
