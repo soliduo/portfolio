@@ -18,8 +18,8 @@ import {
   Instagram,
 } from "lucide-react";
 import "./index.css";
-import logoLight from '/logo_soliduo_preto.png';
-import logoDark from '/logo_soliduo_branco.png';
+import logoDark from '/logo_soliduo_preto.png';
+import logoLight from '/logo_soliduo_branco.png';
 
 const BRAND = {
   name: "SoliDuo",
