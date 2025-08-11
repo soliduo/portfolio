@@ -118,16 +118,16 @@ function Nav() {
     <header className="sticky top-0 z-50 border-b border-soft bg-[rgb(var(--bg)/0.7)] backdrop-blur">
       <Container>
         <nav className="flex h-16 items-center justify-between">
-          <a href="#top" className="flex items-center gap-3 text-lg font-extrabold heading">
+          <div href="#top" className="flex items-center gap-3 text-lg font-extrabold heading">
             <img
-              src={effectiveTheme === "dark" ? "/logo_soliduo_preto.png" : "/logo_soliduo_branco.png"}
+              src={effectiveTheme === "dark" ? "../public/logo_soliduo_preto.png" : "../public/logo_soliduo_branco.png"}
               alt="Logo SoliDuo"
               className="h-6 w-6"
             />
             <span>
               Soli<span className="text-[rgb(var(--brand))]">Duo</span>
             </span>
-          </a>
+          </div>
           <div className="hidden items-center gap-6 md:flex">
             <a href="#top" className="hover:opacity-80">Home</a>
             <a href="#servicos" className="hover:opacity-80">Serviços</a>

@@ -1,9 +1,0 @@
-- centralizar tudo para melhorar a responsividade em vários tamanhos de tela
-- mudar o lodo do header de escrito pra um logo dinânimo (gif)
-- dark/light mode
-- pt-br/en
-- tags para acessibilidade
-- ajustar css para mobile
-- subir repositorio no threekode e fazer fork no usuario pessoal
-- aprender como ter multiplos usuarios no vscode (commit e push)
-- hover estilo canhao de luz
