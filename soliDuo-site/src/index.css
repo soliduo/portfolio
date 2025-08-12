@@ -118,3 +118,7 @@ html[data-theme="dark"] {
   --cta: 194 163 107; --cta-foreground: 17 17 17;
   --accent: 194 163 107; --border: 255 255 255 / .10; --shadow: 0 8px 30px rgba(0,0,0,.35);
 }
+html { scroll-behavior: smooth; }
+
+/* aplica onde tem id de seção */
+.anchor-offset { scroll-margin-top: 5rem; } /* ~altura do header */
