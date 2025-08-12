@@ -29,8 +29,8 @@ const BRAND = {
   whatsapp: "https://wa.me/5516997372610",
   github: "https://github.com/soliduo",
   linkedin: "www.linkedin.com/in/soli-duo-a79390375",
-  facebook: "Soli Duo",
-  instagram: "Soliduo.oficial",
+  facebook: "SoliDuo",
+  instagram: "Soliduo.official",
 };
 
 const SERVICES = [
