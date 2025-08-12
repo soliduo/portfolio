@@ -20,6 +20,7 @@ import {
 import "./index.css";
 import logoDark from '/logo_soliduo_preto.png';
 import logoLight from '/logo_soliduo_branco.png';
+import { Menu, X} from "lucide-react";
 
 const BRAND = {
   name: "SoliDuo",
@@ -122,65 +123,89 @@ function applyTheme(mode) {
 function Nav() {
   const [mode, setMode] = useState(getInitialMode);
   const [systemDark, setSystemDark] = useState(prefersDark());
+  const [open, setOpen] = useState(false);
 
   useEffect(() => { applyTheme(mode); }, [mode]);
-
   useEffect(() => {
     const mq = window.matchMedia("(prefers-color-scheme: dark)");
     const onChange = (e) => setSystemDark(e.matches);
     if (mode === "system") {
-      setSystemDark(mq.matches); // inicial
+      setSystemDark(mq.matches);
       mq.addEventListener?.("change", onChange);
       return () => mq.removeEventListener?.("change", onChange);
     }
   }, [mode]);
 
   const effectiveTheme = mode === "system" ? (systemDark ? "dark" : "light") : mode;
-
-  const icon = effectiveTheme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />;
+  const themeIcon = effectiveTheme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />;
   const label = mode === "system" ? "Tema: sistema" : `Tema: ${mode}`;
-
-  const THEME_MODES = /** @type const */ (["system", "light", "dark"]);
-  const cycleMode = () => {
-    const i = THEME_MODES.indexOf(mode);
-    setMode(THEME_MODES[(i + 1) % THEME_MODES.length]);
-  };
+  const MODES = /** @type const */ (["system", "light", "dark"]);
+  const cycleMode = () => { const i = MODES.indexOf(mode); setMode(MODES[(i + 1) % MODES.length]); };
+  const navAndClose = () => setOpen(false);
 
   return (
     <header className="sticky top-0 z-50 border-b border-soft bg-[rgb(var(--bg)/0.7)] backdrop-blur">
       <Container>
         <nav className="flex h-16 items-center justify-between">
-          <div href="#top" className="flex items-center gap-3 text-lg font-extrabold heading">
+          {/* logo/link */}
+          <div href="#top" className="flex items-center gap-3 text-lg font-extrabold heading" onClick={navAndClose}>
             <img
-              src={effectiveTheme === 'dark' ? logoDark : logoLight}
+              src={effectiveTheme === "dark" ? logoDark : logoLight}  // dark=preto, light=branco
               alt="Logo SoliDuo"
               className="h-6 w-6"
             />
-            <span>
-              Soli<span className="text-[rgb(var(--brand))]">Duo</span>
-            </span>
+            <span>Soli<span className="text-[rgb(var(--brand))]">Duo</span></span>
           </div>
-          <div className="hidden items-center gap-6 md:flex">
+
+          {/* desktop */}
+          <div className="hidden md:flex items-center gap-6">
             <a href="#top" className="hover:opacity-80">Home</a>
             <a href="#servicos" className="hover:opacity-80">Serviços</a>
             <a href="#eventos" className="hover:opacity-80">Eventos</a>
             <a href="#portfolio" className="hover:opacity-80">Portfólio</a>
             <a href="#automacao" className="hover:opacity-80">Automação</a>
             <a href="#contato" className="hover:opacity-80">Contato</a>
+            <button onClick={cycleMode} className="rounded p-2 hover:bg-white/5" aria-label={label} title={label}>
+              {themeIcon}
+            </button>
+          </div>
+
+          {/* mobile actions */}
+          <div className="md:hidden flex items-center gap-2">
+            <button onClick={cycleMode} className="rounded p-2 hover:bg-white/5" aria-label={label} title={label}>
+              {themeIcon}
+            </button>
             <button
-              onClick={cycleMode}
+              onClick={() => setOpen(v => !v)}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
               className="rounded p-2 hover:bg-white/5"
-              aria-label={label}
-              title={`${label} (clique para alternar)`}
             >
-              {icon}
+              {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </nav>
       </Container>
+
+      {/* drawer mobile */}
+      {open && (
+        <div id="mobile-menu" className="md:hidden border-t border-soft bg-[rgb(var(--bg))]">
+          <Container>
+            <div className="flex flex-col py-3">
+              <a href="#top" onClick={navAndClose} className="py-2">Home</a>
+              <a href="#servicos" onClick={navAndClose} className="py-2">Serviços</a>
+              <a href="#eventos" onClick={navAndClose} className="py-2">Eventos</a>
+              <a href="#portfolio" onClick={navAndClose} className="py-2">Portfólio</a>
+              <a href="#automacao" onClick={navAndClose} className="py-2">Automação</a>
+              <a href="#contato" onClick={navAndClose} className="py-2">Contato</a>
+            </div>
+          </Container>
+        </div>
+      )}
     </header>
   );
 }
+
 
 function Hero() {
   return (
