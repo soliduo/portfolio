@@ -137,8 +137,9 @@ function Nav() {
   }, [mode]);
 
   const effectiveTheme = mode === "system" ? (systemDark ? "dark" : "light") : mode;
-  const themeIcon = effectiveTheme === "dark" ? <Moon className="h-5 w-5" /> : <Sun className="h-5 w-5" />;
-  const label = mode === "system" ? "Tema: sistema" : `Tema: ${mode}`;
+  const nextTheme = effectiveTheme === "dark" ? "light" : "dark";
+  const themeIcon = nextTheme === "light" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />;
+  const label = `Tema: ${nextTheme}`;
   const MODES = /** @type const */ (["system", "light", "dark"]);
   const cycleMode = () => { const i = MODES.indexOf(mode); setMode(MODES[(i + 1) % MODES.length]); };
   const navAndClose = () => setOpen(false);
@@ -150,7 +151,7 @@ function Nav() {
           {/* logo/link */}
           <div href="#top" className="flex items-center gap-3 text-lg font-extrabold heading" onClick={navAndClose}>
             <img
-              src={effectiveTheme === "dark" ? logoDark : logoLight}  // dark=preto, light=branco
+              src={effectiveTheme === "dark" ? logoDark : logoLight}
               alt="Logo SoliDuo"
               className="h-6 w-6"
             />
