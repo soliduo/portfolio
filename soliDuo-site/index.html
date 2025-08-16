@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,8 +14,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Montserrat:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
+    rel="stylesheet" />
+  <!-- Titillium Web -->
+  <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Delius -->
+  <link href="https://fonts.googleapis.com/css2?family=Delius&display=swap" rel="stylesheet">
+
+  <!-- Libre Franklin -->
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Schibsted Grotesk -->
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+
 
   <!-- Anti-flash de tema: aplica override salvo antes do React carregar -->
   <script>
@@ -26,7 +38,7 @@
         } else {
           document.documentElement.removeAttribute('data-theme');
         }
-      } catch (e) {}
+      } catch (e) { }
     })();
   </script>
 
@@ -37,12 +49,12 @@
   <!-- SEO básico -->
   <title>SoliDuo — Sites que encantam. Automações que vendem.</title>
   <meta name="description"
-        content="SoliDuo: landing pages, páginas para casamentos, aniversários e eventos, portfólios e automações de WhatsApp com n8n." />
+    content="SoliDuo: landing pages, páginas para casamentos, aniversários e eventos, portfólios e automações de WhatsApp com n8n." />
 
   <!-- Open Graph / Sharing -->
   <meta property="og:title" content="SoliDuo — Sites que encantam. Automações que vendem." />
   <meta property="og:description"
-        content="Landing pages, eventos, portfólios e automações de WhatsApp (n8n). Atendemos Brasil todo." />
+    content="Landing pages, eventos, portfólios e automações de WhatsApp (n8n). Atendemos Brasil todo." />
   <meta property="og:type" content="website" />
   <meta property="og:image" content="/og.jpg" />
   <meta property="og:url" content="https://seu-dominio.com/" />
@@ -51,16 +63,30 @@
   <!-- Fallback sem JS: cor de fundo correta para evitar flash branco -->
   <noscript>
     <style>
-      html,body,#root{height:100%}
-      body{background:#F8F6F3;color:#111}
-      @media (prefers-color-scheme: dark){
-        body{background:#0A0A0A;color:#F8F6F3}
+      html,
+      body,
+      #root {
+        height: 100%
+      }
+
+      body {
+        background: #F8F6F3;
+        color: #111
+      }
+
+      @media (prefers-color-scheme: dark) {
+        body {
+          background: #0A0A0A;
+          color: #F8F6F3
+        }
       }
     </style>
   </noscript>
 </head>
+
 <body>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
+
 </html>
