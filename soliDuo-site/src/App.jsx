@@ -16,6 +16,8 @@ import {
   Moon,
   Facebook,
   Instagram,
+  PhoneCallIcon,
+  AlignCenter,
 } from "lucide-react";
 import "./index.css";
 import logoDark from '/logo_soliduo_preto.png';
@@ -24,7 +26,7 @@ import { Menu, X} from "lucide-react";
 
 const BRAND = {
   name: "SoliDuo",
-  tagline: "Sites que encantam. Automações que vendem.",
+  tagline: "Experiências digitais, com sofisticação e sem complicação.",
   email: "soliduo.contact@gmail.com",
   whatsapp: "https://wa.me/5516997372610",
   github: "https://github.com/soliduo",
@@ -159,12 +161,13 @@ function Nav() {
           </div>
 
           {/* desktop */}
-          <div className="hidden md:flex items-center gap-6">
+          <div className="heading hidden md:flex items-center gap-6">
             <a href="#top" className="hover:opacity-80">Home</a>
+            <a href="#sobre" className="hover:opacity-80">Sobre Nós</a>
             <a href="#servicos" className="hover:opacity-80">Serviços</a>
-            <a href="#eventos" className="hover:opacity-80">Eventos</a>
+            {/* <a href="#eventos" className="hover:opacity-80">Eventos</a> */}
             <a href="#portfolio" className="hover:opacity-80">Portfólio</a>
-            <a href="#automacao" className="hover:opacity-80">Automação</a>
+            {/* <a href="#automacao" className="hover:opacity-80">Automação</a> */}
             <a href="#contato" className="hover:opacity-80">Contato</a>
             <button onClick={cycleMode} className="rounded p-2 hover:bg-white/5" aria-label={label} title={label}>
               {themeIcon}
@@ -192,12 +195,13 @@ function Nav() {
       {open && (
         <div id="mobile-menu" className="md:hidden border-t border-soft bg-[rgb(var(--bg))]">
           <Container>
-            <div className="flex flex-col py-3">
+            <div className="heading flex flex-col py-3">
               <a href="#top" onClick={navAndClose} className="py-2">Home</a>
+              <a href="#sobre" onClick={navAndClose} className="py-2">Sobre Nós</a>
               <a href="#servicos" onClick={navAndClose} className="py-2">Serviços</a>
-              <a href="#eventos" onClick={navAndClose} className="py-2">Eventos</a>
+              {/* <a href="#eventos" onClick={navAndClose} className="py-2">Eventos</a> */}
               <a href="#portfolio" onClick={navAndClose} className="py-2">Portfólio</a>
-              <a href="#automacao" onClick={navAndClose} className="py-2">Automação</a>
+              {/* <a href="#automacao" onClick={navAndClose} className="py-2">Automação</a> */}
               <a href="#contato" onClick={navAndClose} className="py-2">Contato</a>
             </div>
           </Container>
@@ -221,7 +225,7 @@ function Hero() {
             Fazemos <span className="text-[rgb(var(--brand))] font-semibold">landing pages</span>,
             páginas para <span className="text-[rgb(var(--brand))] font-semibold">casamentos, batizados e festas</span>,
             <span className="text-[rgb(var(--brand))] font-semibold"> portfólios profissionais</span> e
-            <span className="text-[rgb(var(--brand))] font-semibold"> automações de WhatsApp</span> com n8n (agendamentos e atendimento).
+            <span className="text-[rgb(var(--brand))] font-semibold"> automações de WhatsApp</span> (agendamentos e atendimento).
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
             <a href="#portfolio" className="btn-primary inline-flex items-center gap-2 hover:opacity-90">
@@ -231,11 +235,11 @@ function Hero() {
               Orçar agora
             </a>
           </div>
-          <div className="mt-6 flex flex-wrap gap-2">
+          {/* <div className="mt-6 flex flex-wrap gap-2">
             {["React", "Tailwind", "Java/Spring", "Node/TS", "n8n", "SEO"].map(chip => (
               <span key={chip} className="chip">{chip}</span>
             ))}
-          </div>
+          </div> */}
         </div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="relative">
           <div className="aspect-square w-full overflow-hidden rounded-[1.5rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)] bg-[rgb(var(--card))]">
@@ -316,7 +320,7 @@ function Portfolio() {
     <Container>
       <section id="portfolio" className="py-16 md:py-20">
         <SectionTitle eyebrow="Trabalhos" title="Alguns destaques"
-          subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e bonita." />
+          subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e sofisticada." />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {WORKS.map((p) => (
             <article key={p.title} className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
@@ -435,10 +439,13 @@ export default function App() {
       <footer className="border-t border-soft py-8">
         <Container>
           <div className="flex flex-col items-center justify-between gap-3 text-sm text-muted md:flex-row">
-            <p>© {new Date().getFullYear()} {BRAND.name}. Feito com React + Tailwind.</p>
+            <p>© {new Date().getFullYear()}. Feito com 🩵 por {BRAND.name}. </p> {/*centralizar */}
             <div className="flex items-center gap-3">
-              <a href={BRAND.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Github className="h-4 w-4" /> GitHub</a>
-              <a href={normalizeUrl(BRAND.linkedin)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Linkedin className="h-4 w-4" /> LinkedIn</a>
+              {/* <a href={BRAND.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Github className="h-4 w-4" /> GitHub</a> */}
+              <a href={normalizeUrl(BRAND.whatsapp)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Phone className="h-4 w-4" /></a> {/*procurar icone whats*/}
+              <a href={normalizeUrl(BRAND.instagram)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Instagram className="h-4 w-4" /></a>
+              <a href={normalizeUrl(BRAND.facebook)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Facebook className="h-4 w-4" /></a>
+              <a href={normalizeUrl(BRAND.linkedin)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Linkedin className="h-4 w-4" /></a>
             </div>
           </div>
         </Container>
