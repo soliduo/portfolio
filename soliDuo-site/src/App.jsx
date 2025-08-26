@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   Download,
   ExternalLink,
-  Github,
   Linkedin,
   Mail,
   MessagesSquare,
@@ -18,22 +17,38 @@ import {
   Instagram,
   PhoneCallIcon,
   AlignCenter,
+  Menu,
+  X,
 } from "lucide-react";
 import "./index.css";
 import logoDark from '/logo_soliduo_preto.png';
 import logoLight from '/logo_soliduo_branco.png';
-import { Menu, X} from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 
 const BRAND = {
   name: "SoliDuo",
   tagline: "Experiências digitais, com sofisticação e sem complicação.",
   email: "soliduo.contact@gmail.com",
   whatsapp: "https://wa.me/5516997372610",
-  github: "https://github.com/soliduo",
-  linkedin: "www.linkedin.com/in/soli-duo-a79390375",
+  linkedin: "linkedin.com/in/soliduo",
   facebook: "SoliDuo",
   instagram: "Soliduo.official",
 };
+
+const ABOUT = [
+  {
+    title: "Missão",
+    desc: "Transformar ideias em experiências digitais únicas, criando páginas e automações personalizadas que conectam pessoas e negócios de forma criativa, acessível e inovadora.",
+  },
+  {
+    title: "Visão",
+    desc: "Ser referência internacional em soluções digitais criativas, democratizando o acesso a tecnologia de qualidade para todos — de pequenos empreendedores a grandes sonhadores.",
+  },
+  {
+    title: "Valores",
+    desc: "Personalização – Cada projeto é único, feito sob medida para refletir a identidade e o sonho de quem confia na gente.\n" + "Acessibilidade – Tornar tecnologia e inovação algo possível para todos, sem barreiras de tamanho ou orçamento.\n" + "Criatividade – Pensar fora da caixa e transformar até ideias inusitadas em realidade digital.\n" + "Parceria – Caminhar lado a lado com cada cliente, entendendo suas necessidades e tornando-se parte da sua história.\n" + "Inovação Humana – Usar tecnologia para aproximar pessoas, simplificar processos e criar impacto positivo.",
+  },
+];
 
 const SERVICES = [
   {
@@ -165,9 +180,7 @@ function Nav() {
             <a href="#top" className="hover:opacity-80">Home</a>
             <a href="#sobre" className="hover:opacity-80">Sobre Nós</a>
             <a href="#servicos" className="hover:opacity-80">Serviços</a>
-            {/* <a href="#eventos" className="hover:opacity-80">Eventos</a> */}
             <a href="#portfolio" className="hover:opacity-80">Portfólio</a>
-            {/* <a href="#automacao" className="hover:opacity-80">Automação</a> */}
             <a href="#contato" className="hover:opacity-80">Contato</a>
             <button onClick={cycleMode} className="rounded p-2 hover:bg-white/5" aria-label={label} title={label}>
               {themeIcon}
@@ -199,9 +212,7 @@ function Nav() {
               <a href="#top" onClick={navAndClose} className="py-2">Home</a>
               <a href="#sobre" onClick={navAndClose} className="py-2">Sobre Nós</a>
               <a href="#servicos" onClick={navAndClose} className="py-2">Serviços</a>
-              {/* <a href="#eventos" onClick={navAndClose} className="py-2">Eventos</a> */}
               <a href="#portfolio" onClick={navAndClose} className="py-2">Portfólio</a>
-              {/* <a href="#automacao" onClick={navAndClose} className="py-2">Automação</a> */}
               <a href="#contato" onClick={navAndClose} className="py-2">Contato</a>
             </div>
           </Container>
@@ -211,11 +222,10 @@ function Nav() {
   );
 }
 
-
 function Hero() {
   return (
     <Container>
-      <section className="grid items-center gap-10 py-16 md:grid-cols-2 md:py-24">
+      <section className="grid items-center gap-10 py-16 md:grid-cols-2">
         <div>
           <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
             className="heading text-4xl font-extrabold leading-tight md:text-6xl">
@@ -235,11 +245,6 @@ function Hero() {
               Orçar agora
             </a>
           </div>
-          {/* <div className="mt-6 flex flex-wrap gap-2">
-            {["React", "Tailwind", "Java/Spring", "Node/TS", "n8n", "SEO"].map(chip => (
-              <span key={chip} className="chip">{chip}</span>
-            ))}
-          </div> */}
         </div>
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="relative">
           <div className="aspect-square w-full overflow-hidden rounded-[1.5rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)] bg-[rgb(var(--card))]">
@@ -256,21 +261,50 @@ function Hero() {
   );
 }
 
-function SectionTitle({ eyebrow, title, subtitle }) {
+function SectionTitle({ title, subtitle }) {
   return (
     <div className="mb-10">
-      {eyebrow ? <span className="text-xs uppercase tracking-widest text-[rgb(var(--accent))]">{eyebrow}</span> : null}
       <h2 className="heading mt-2 text-2xl font-bold md:text-3xl">{title}</h2>
       {subtitle ? <p className="mt-2 text-muted">{subtitle}</p> : null}
     </div>
   );
 }
 
+function About() {
+  return (
+    <Container>
+      <section id="sobre" className="py-16 md:py-20">
+        <SectionTitle
+          title="Sobre Nós"
+          subtitle="Duas pessoas que querem usar seu amor pela tecnologia para ajudar outras pessoas."
+        />
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-2">
+          {ABOUT.map((s, i) => (
+            <article
+              key={s.title}
+              className={`
+          overflow-hidden rounded-[1.25rem] border border-soft 
+          bg-[rgb(var(--card))] p-5 shadow-[0_8px_30px_rgba(0,0,0,.25)]
+          ${i === 2 ? "sm:col-span-2 lg:col-span-2" : ""}
+        `}
+            >
+              <h3 className="heading mt-1 text-lg font-semibold">{s.title}</h3>
+              <p className="mt-2 text-sm text-muted whitespace-pre-line">{s.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+    </Container>
+  );
+
+}
+
 function Services() {
   return (
     <Container>
       <section id="servicos" className="py-16 md:py-20">
-        <SectionTitle eyebrow="O que fazemos" title="Serviços sob medida"
+        <SectionTitle title="Serviços"
           subtitle="Do convite digital à landing de alta conversão — com automação de ponta a ponta." />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICES.map((s) => (
@@ -289,37 +323,37 @@ function Services() {
   );
 }
 
-function Events() {
-  return (
-    <Container>
-      <section id="eventos" className="py-16 md:py-20">
-        <SectionTitle eyebrow="Eventos" title="Casamentos, batizados e festas"
-          subtitle="Convites digitais completos com RSVP, listas, mapas e álbum." />
-        <div className="grid gap-6 md:grid-cols-2">
-          <div className="rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-6 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
-            <h3 className="heading text-lg font-semibold">Convites digitais personalizados</h3>
-            <p className="mt-2 text-sm text-muted">Tema do seu jeito, domínio próprio e atualização fácil. Integração com lista de presentes e Google Maps.</p>
-            <ul className="mt-3 space-y-1 text-sm text-muted">
-              <li>• RSVP com confirmação via WhatsApp</li>
-              <li>• Agenda e cronograma do evento</li>
-              <li>• Álbum pós-evento</li>
-            </ul>
-          </div>
-          <div className="overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
-            <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1640&auto=format&fit=crop"
-              alt="Página de evento" className="h-full w-full object-cover" loading="lazy" />
-          </div>
-        </div>
-      </section>
-    </Container>
-  );
-}
+// function Events() {
+//   return (
+//     <Container>
+//       <section id="eventos" className="py-16 md:py-20">
+//         <SectionTitle title="Casamentos, batizados e festas"
+//           subtitle="Convites digitais completos com RSVP, listas, mapas e álbum." />
+//         <div className="grid gap-6 md:grid-cols-2">
+//           <div className="rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-6 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
+//             <h3 className="heading text-lg font-semibold">Convites digitais personalizados</h3>
+//             <p className="mt-2 text-sm text-muted">Tema do seu jeito, domínio próprio e atualização fácil. Integração com lista de presentes e Google Maps.</p>
+//             <ul className="mt-3 space-y-1 text-sm text-muted">
+//               <li>• RSVP com confirmação via WhatsApp</li>
+//               <li>• Agenda e cronograma do evento</li>
+//               <li>• Álbum pós-evento</li>
+//             </ul>
+//           </div>
+//           <div className="overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
+//             <img src="https://images.unsplash.com/photo-1519741497674-611481863552?q=80&w=1640&auto=format&fit=crop"
+//               alt="Página de evento" className="h-full w-full object-cover" loading="lazy" />
+//           </div>
+//         </div>
+//       </section>
+//     </Container>
+//   );
+// }
 
 function Portfolio() {
   return (
     <Container>
       <section id="portfolio" className="py-16 md:py-20">
-        <SectionTitle eyebrow="Trabalhos" title="Alguns destaques"
+        <SectionTitle title="Alguns destaques"
           subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e sofisticada." />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {WORKS.map((p) => (
@@ -347,7 +381,7 @@ function Automation() {
   return (
     <Container>
       <section id="automacao" className="py-16 md:py-20">
-        <SectionTitle eyebrow="Automação" title="WhatsApp + n8n = atendimento 24/7"
+        <SectionTitle title="WhatsApp + n8n = atendimento 24/7"
           subtitle="Captação de leads, agendamentos e follow-ups automáticos." />
         <div className="grid gap-6 md:grid-cols-3">
           {FLOW.map((step) => (
@@ -383,14 +417,14 @@ function Contact() {
   return (
     <Container>
       <section id="contato" className="py-16 md:py-20">
-        <SectionTitle eyebrow="Vamos conversar" title="Contato" subtitle="Atendemos Brasil todo, remoto. Resposta rápida!" />
+        <SectionTitle title="Contato" subtitle="Atendemos Brasil todo, remoto. Resposta rápida!" />
         <div className="grid gap-6 md:grid-cols-2">
           <div className="rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-6 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
             <h3 className="heading font-semibold">Fale com a SoliDuo</h3>
             <p className="mt-2 text-sm text-muted">Preferimos primeiro contato por e-mail ou WhatsApp. Passamos valores após entender escopo.</p>
             <div className="mt-4 grid gap-2">
               <a href={`mailto:${BRAND.email}`} className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Mail className="h-4 w-4" /> {BRAND.email}</a>
-              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Phone className="h-4 w-4" /> WhatsApp</a>
+              <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><FaWhatsapp className="h-4 w-4" /> WhatsApp</a>
               <a href={linkedinHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Linkedin className="h-4 w-4" /> LinkedIn</a>
               <a href={facebookHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Facebook className="h-4 w-4" /> Facebook</a>
               <a href={instagramHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-xl border border-soft px-3 py-2 hover:bg-white/5"><Instagram className="h-4 w-4" /> Instagram</a>
@@ -403,9 +437,6 @@ function Contact() {
               <li>• Prazos, referências e conteúdo disponível.</li>
               <li>• Se já tem domínio/hospedagem e integrações desejadas.</li>
             </ul>
-            <a href="#portfolio" className="mt-4 btn-ghost inline-flex items-center gap-2">
-              <Download className="h-4 w-4" /> Ver cases
-            </a>
           </div>
         </div>
       </section>
@@ -419,32 +450,22 @@ export default function App() {
       <Nav />
       <main>
         <Hero />
+        <About />
         <Services />
-        <Events />
+        {/* <Events /> */}
         <Portfolio />
         <Automation />
         <Contact />
       </main>
 
-      {/* Botão flutuante WhatsApp */}
-      <a
-        href={BRAND.whatsapp}
-        target="_blank" rel="noopener noreferrer"
-        className="fixed bottom-5 right-5 z-50 inline-flex items-center justify-center rounded-full w-14 h-14 btn-primary gap-2 hover:opacity-90"
-        aria-label="Falar no WhatsApp"
-      >
-        <MessagesSquare className="w-7 h-7" />
-      </a>
-
-      <footer className="border-t border-soft py-8">
+      <footer className="fixed bottom-0 left-0 w-full border-t border-soft py-4 bg-app z-50">
         <Container>
           <div className="flex flex-col items-center justify-between gap-3 text-sm text-muted md:flex-row">
-            <p>© {new Date().getFullYear()}. Feito com 🩵 por {BRAND.name}. </p> {/*centralizar */}
+            <p>© {new Date().getFullYear()}. Feito com 🩵 por {BRAND.name}. </p>
             <div className="flex items-center gap-3">
-              {/* <a href={BRAND.github} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Github className="h-4 w-4" /> GitHub</a> */}
-              <a href={normalizeUrl(BRAND.whatsapp)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Phone className="h-4 w-4" /></a> {/*procurar icone whats*/}
-              <a href={normalizeUrl(BRAND.instagram)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Instagram className="h-4 w-4" /></a>
-              <a href={normalizeUrl(BRAND.facebook)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Facebook className="h-4 w-4" /></a>
+              <a href={normalizeUrl(BRAND.whatsapp)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><FaWhatsapp className="h-4 w-4" /></a>
+              <a href={instagramUrl(BRAND.instagram)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Instagram className="h-4 w-4" /></a>
+              <a href={facebookUrl(BRAND.facebook)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Facebook className="h-4 w-4" /></a>
               <a href={normalizeUrl(BRAND.linkedin)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 hover:opacity-80"><Linkedin className="h-4 w-4" /></a>
             </div>
           </div>

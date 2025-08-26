@@ -20,7 +20,7 @@
   --shadow: 0 8px 30px rgba(0, 0, 0, .12);
 
   --font-heading: "Schibsted Grotesk", ui-serif, Georgia, serif;
-  --font-body: "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto Slab, Arial, sans-serif;
+  --font-body: "Montserrat", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
 }
 
 body { font-family: var(--font-body); }
@@ -109,7 +109,7 @@ a:hover { opacity: .9; }
 html[data-theme="light"] {
   --bg: 248 246 243; --card: 255 255 255; --text: 17 17 17; --muted: 102 102 102;
   --brand: 17 17 17;
-  --cta: 17 17 17; --cta-foreground: 253 252 250;
+  --cta: 194 163 107; --cta-foreground: 253 252 250;
   --accent: 194 163 107; --border: 0 0 0 / .10; --shadow: 0 8px 30px rgba(0,0,0,.12);
 }
 html[data-theme="dark"] {
@@ -122,3 +122,6 @@ html { scroll-behavior: smooth; }
 
 /* aplica onde tem id de seção */
 .anchor-offset { scroll-margin-top: 5rem; } /* ~altura do header */
+
+/* Cor de superfície sólida (segue o tema light/dark) */
+.bg-app { background-color: rgb(var(--bg)); }
