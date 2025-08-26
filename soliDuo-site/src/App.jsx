@@ -249,11 +249,15 @@ function Hero() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.1 }} className="relative">
           <div className="aspect-square w-full overflow-hidden rounded-[1.5rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)] bg-[rgb(var(--card))]">
             <img
-              src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=1640&auto=format&fit=crop"
+              src="https://www.free-mockup.com/wp-content/uploads/edd/2024/09/Responsive-Scene-Device-Free-Mockups-01.jpg.webp"
               alt="Mockup de site e automações"
               className="h-full w-full object-cover"
               loading="lazy"
             />
+            {/* imagem em fundo preto https://www.free-mockup.com/wp-content/uploads/edd/2024/12/Realistic-Device-Mockup-Free-Set-02.jpg.webp 
+            imagem em fundo brancohttps://www.free-mockup.com/wp-content/uploads/edd/2024/12/Realistic-Device-Mockup-Free-Set-01.jpg.webp
+            outra opção https://www.free-mockup.com/wp-content/uploads/edd/2020/05/Free-Apple-Multi-Device-Mockup-Top-View-1000x750.jpg.webp
+            outra imagem https://www.free-mockup.com/wp-content/uploads/edd/2020/05/Digital-Device-Mockup-Freebie-1000x750.jpg*/}
           </div>
         </motion.div>
       </section>
@@ -353,7 +357,7 @@ function Portfolio() {
   return (
     <Container>
       <section id="portfolio" className="py-16 md:py-20">
-        <SectionTitle title="Alguns destaques"
+        <SectionTitle title="Portfólio"
           subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e sofisticada." />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {WORKS.map((p) => (
@@ -377,37 +381,37 @@ function Portfolio() {
   );
 }
 
-function Automation() {
-  return (
-    <Container>
-      <section id="automacao" className="py-16 md:py-20">
-        <SectionTitle title="WhatsApp + n8n = atendimento 24/7"
-          subtitle="Captação de leads, agendamentos e follow-ups automáticos." />
-        <div className="grid gap-6 md:grid-cols-3">
-          {FLOW.map((step) => (
-            <div key={step.title} className="rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-5 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
-              <div className="flex items-center gap-2 text-[rgb(var(--accent))]">{step.icon}<span className="text-sm font-semibold">Etapa</span></div>
-              <h3 className="heading mt-1 text-base font-semibold">{step.title}</h3>
-              <p className="mt-1 text-sm text-muted">{step.text}</p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-6 rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-5 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
-          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
-            <div>
-              <h3 className="heading text-lg font-semibold">Agendamentos automatizados</h3>
-              <p className="text-sm text-muted">Cliente escolhe horário pelo WhatsApp, n8n valida disponibilidade e confirma. Integração com Google Calendar/Sheets/CRM.</p>
-            </div>
-            <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer"
-              className="btn-primary inline-flex items-center gap-2">
-              <MessagesSquare className="h-4 w-4" /> Falar no WhatsApp
-            </a>
-          </div>
-        </div>
-      </section>
-    </Container>
-  );
-}
+// function Automation() {
+//   return (
+//     <Container>
+//       <section id="automacao" className="py-16 md:py-20">
+//         <SectionTitle title="WhatsApp + n8n = atendimento 24/7"
+//           subtitle="Captação de leads, agendamentos e follow-ups automáticos." />
+//         <div className="grid gap-6 md:grid-cols-3">
+//           {FLOW.map((step) => (
+//             <div key={step.title} className="rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-5 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
+//               <div className="flex items-center gap-2 text-[rgb(var(--accent))]">{step.icon}<span className="text-sm font-semibold">Etapa</span></div>
+//               <h3 className="heading mt-1 text-base font-semibold">{step.title}</h3>
+//               <p className="mt-1 text-sm text-muted">{step.text}</p>
+//             </div>
+//           ))}
+//         </div>
+//         <div className="mt-6 rounded-[1.25rem] border border-soft bg-[rgb(var(--card))] p-5 shadow-[0_8px_30px_rgba(0,0,0,.25)]">
+//           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+//             <div>
+//               <h3 className="heading text-lg font-semibold">Agendamentos automatizados</h3>
+//               <p className="text-sm text-muted">Cliente escolhe horário pelo WhatsApp, n8n valida disponibilidade e confirma. Integração com Google Calendar/Sheets/CRM.</p>
+//             </div>
+//             <a href={BRAND.whatsapp} target="_blank" rel="noopener noreferrer"
+//               className="btn-primary inline-flex items-center gap-2">
+//               <MessagesSquare className="h-4 w-4" /> Falar no WhatsApp
+//             </a>
+//           </div>
+//         </div>
+//       </section>
+//     </Container>
+//   );
+// }
 
 function Contact() {
   const linkedinHref = normalizeUrl(BRAND.linkedin);
@@ -454,7 +458,7 @@ export default function App() {
         <Services />
         {/* <Events /> */}
         <Portfolio />
-        <Automation />
+        {/* <Automation /> */}
         <Contact />
       </main>
 
