@@ -24,6 +24,9 @@ import "./index.css";
 import logoDark from '/logo_soliduo_preto.png';
 import logoLight from '/logo_soliduo_branco.png';
 import { FaWhatsapp } from "react-icons/fa";
+import { HashRouter, Routes, Route, Link } from "react-router-dom";
+import ExemploLanding1 from "./exemplos/landing/exemplo1";
+import LeadExemplo1 from "./exemplos/landing/lead/leadExemplo1.jsx";
 
 const BRAND = {
   name: "SoliDuo",
@@ -77,7 +80,8 @@ const WORKS = [
   {
     title: "Landing de Lançamento", desc: "Estrutura enxuta focada em conversão com testes A/B.",
     stack: ["React", "Tailwind"],
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop"
+    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop",
+    link: "#/exemplos/landing",
   },
   {
     title: "Convite de Casamento Digital", desc: "Página com RSVP, mapa e lista de presentes integrada.",
@@ -360,7 +364,7 @@ function Portfolio() {
         <SectionTitle title="Portfólio"
           subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e sofisticada." />
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {WORKS.map((p) => (
+          {/* {WORKS.map((p) => (
             <article key={p.title} className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
               <div className="relative aspect-video overflow-hidden">
                 <img src={p.img} alt={p.title}
@@ -374,7 +378,45 @@ function Portfolio() {
                 </div>
               </div>
             </article>
+          ))} */}
+          {WORKS.map((p) => (
+            <article
+              key={p.title}
+              className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]"
+            >
+              <div className="relative aspect-video overflow-hidden">
+                {p.link ? (
+                  <a href={p.link} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={p.img}
+                      alt={p.title}
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                      loading="lazy"
+                    />
+                  </a>
+                ) : (
+                  <img
+                    src={p.img}
+                    alt={p.title}
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    loading="lazy"
+                  />
+                )}
+              </div>
+              <div className="p-5 bg-[rgb(var(--card))]">
+                <h3 className="heading text-lg font-semibold">
+                  {p.link ? <a href={p.link}>{p.title}</a> : p.title}
+                </h3>
+                <p className="mt-2 text-sm text-muted">{p.desc}</p>
+                <div className="mt-3 flex flex-wrap gap-2">
+                  {p.stack.map((s) => (
+                    <span key={s} className="chip">{s}</span>
+                  ))}
+                </div>
+              </div>
+            </article>
           ))}
+
         </div>
       </section>
     </Container>
@@ -448,7 +490,7 @@ function Contact() {
   );
 }
 
-export default function App() {
+function HomeApp() {
   return (
     <div id="top" className="min-h-screen text-[rgb(var(--text))]" style={{ backgroundColor: "rgb(var(--bg))" }}>
       <Nav />
@@ -476,5 +518,17 @@ export default function App() {
         </Container>
       </footer>
     </div>
+  );
+}
+
+export default function App() {
+  return (
+    <HashRouter>
+      <Routes>
+        <Route path="/" element={<HomeApp />} />
+        <Route path="/exemplos/landing" element={<ExemploLanding1 />} />
+        <Route path="/exemplos/landing/lead" element={<LeadExemplo1 />} />
+      </Routes>
+    </HashRouter>
   );
 }
