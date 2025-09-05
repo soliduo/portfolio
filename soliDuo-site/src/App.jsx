@@ -1,5 +1,6 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useRef } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import {
   ArrowRight,
   CalendarClock,
@@ -25,8 +26,11 @@ import logoDark from '/logo_soliduo_preto.png';
 import logoLight from '/logo_soliduo_branco.png';
 import { FaWhatsapp } from "react-icons/fa";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
-import ExemploLanding1 from "./exemplos/landing/exemplo1";
-import LeadExemplo1 from "./exemplos/landing/lead/leadExemplo1.jsx";
+import ExemploLanding1 from "./exemplos/landing/perfume.jsx";
+import LeadExemplo1 from "./exemplos/landing/lead/leadPerfume.jsx";
+import CursoCtrlC from "./exemplos/landing/cursoCtrlC.tsx";
+import SaibaMaisCtrlC from "./exemplos/landing/saibaMaisCtrlC.jsx";
+import LeadCtrlC from "./exemplos/landing/lead/leadCtrlC";
 
 const BRAND = {
   name: "SoliDuo",
@@ -78,10 +82,16 @@ const SERVICES = [
 
 const WORKS = [
   {
-    title: "Landing de Lançamento", desc: "Estrutura enxuta focada em conversão com testes A/B.",
-    stack: ["React", "Tailwind"],
-    img: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop",
-    link: "#/exemplos/landing",
+    title: "Landing de Produtos", desc: "Estrutura enxuta focada em conversão e captura de leads.",
+    stack: ["React", "Tailwind", "Leads"],
+    img: "https://img.freepik.com/fotos-premium/ultra-realista-fundo-laranja-4k-foto-hd-para-o-produto_1193781-21506.jpg?w=1480",
+    link: "#/exemplos/perfume",
+  },
+  {
+    title: "Landing de Infoprodutos", desc: "Estrutura enxuta focada em conversão com testes A/B.",
+    stack: ["React", "Tailwind", "Google Sheets"],
+    img: "https://flammadesign.com.br/wp-content/uploads/2024/04/egy-connting-digital-devices-concept-scaled.webp",
+    link: "#/exemplos/ctrlc",
   },
   {
     title: "Convite de Casamento Digital", desc: "Página com RSVP, mapa e lista de presentes integrada.",
@@ -357,67 +367,208 @@ function Services() {
 //   );
 // }
 
+// function Portfolio() {
+//   return (
+//     <Container>
+//       <section id="portfolio" className="py-16 md:py-20">
+//         <SectionTitle title="Portfólio"
+//           subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e sofisticada." />
+//         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+//           {/* {WORKS.map((p) => (
+//             <article key={p.title} className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
+//               <div className="relative aspect-video overflow-hidden">
+//                 <img src={p.img} alt={p.title}
+//                   className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" />
+//               </div>
+//               <div className="p-5 bg-[rgb(var(--card))]">
+//                 <h3 className="heading text-lg font-semibold">{p.title}</h3>
+//                 <p className="mt-2 text-sm text-muted">{p.desc}</p>
+//                 <div className="mt-3 flex flex-wrap gap-2">
+//                   {p.stack.map((s) => <span key={s} className="chip">{s}</span>)}
+//                 </div>
+//               </div>
+//             </article>
+//           ))} */}
+//           {WORKS.map((p) => (
+//             <article
+//               key={p.title}
+//               className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]"
+//             >
+//               <div className="relative aspect-video overflow-hidden">
+//                 {p.link ? (
+//                   <a href={p.link} target="_blank" rel="noopener noreferrer">
+//                     <img
+//                       src={p.img}
+//                       alt={p.title}
+//                       className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+//                       loading="lazy"
+//                     />
+//                   </a>
+//                 ) : (
+//                   <img
+//                     src={p.img}
+//                     alt={p.title}
+//                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+//                     loading="lazy"
+//                   />
+//                 )}
+//               </div>
+//               <div className="p-5 bg-[rgb(var(--card))]">
+//                 <h3 className="heading text-lg font-semibold">
+//                   {p.link ? <a href={p.link}>{p.title}</a> : p.title}
+//                 </h3>
+//                 <p className="mt-2 text-sm text-muted">{p.desc}</p>
+//                 <div className="mt-3 flex flex-wrap gap-2">
+//                   {p.stack.map((s) => (
+//                     <span key={s} className="chip">{s}</span>
+//                   ))}
+//                 </div>
+//               </div>
+//             </article>
+//           ))}
+
+//         </div>
+//       </section>
+//     </Container>
+//   );
+// }
+function PortfolioCard({ p }) {
+  return (
+    <article className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)] bg-[rgb(var(--card))]">
+      <div className="relative aspect-[3/2] overflow-hidden">
+        {p.link ? (
+          <a href={p.link}>
+            <img
+              src={p.img}
+              alt={p.title}
+              className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+          </a>
+        ) : (
+          <img
+            src={p.img}
+            alt={p.title}
+            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+            loading="lazy"
+          />
+        )}
+      </div>
+      <div className="p-5">
+        <h3 className="heading text-lg font-semibold">
+          {p.link ? <a href={p.link}>{p.title}</a> : p.title}
+        </h3>
+        <p className="mt-2 text-sm text-muted">{p.desc}</p>
+        <div className="mt-3 flex flex-wrap gap-2">
+          {p.stack.map((s) => (
+            <span key={s} className="chip">{s}</span>
+          ))}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function Carousel({ items }) {
+  const ref = useRef(null);
+  const [isHover, setIsHover] = useState(false);
+
+  // Autoplay
+  useEffect(() => {
+    if (!ref.current) return;
+    const GAP = 24; // gap-6
+    const tick = () => {
+      if (isHover) return;
+      const first = el.querySelector(":scope > * > div"); // pega o div com width %
+      if (!first) return;
+      const w = first.getBoundingClientRect().width + GAP;
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + w, behavior: atEnd ? "auto" : "smooth" });
+    };
+
+    const id = setInterval(tick, 3000);
+    return () => clearInterval(id);
+  }, [isHover]);
+
+  const getStep = () => {
+    const el = ref.current;
+    if (!el) return 0;
+    const first = el.querySelector(":scope > *");
+    const second = first?.nextElementSibling;
+    // distância entre o início do 1º e o início do 2º (inclui margens/gaps)
+    if (first && second) return second.offsetLeft - first.offsetLeft;
+    // fallback: largura do primeiro item
+    return first?.getBoundingClientRect().width || el.clientWidth;
+  };
+
+  const go = (dir = 1) => {
+    const el = ref.current;
+    if (!el) return;
+    const step = getStep();
+    const max = el.scrollWidth - el.clientWidth;
+    const next = el.scrollLeft + dir * step;
+
+    if (next < 0) {
+      // voltar do início → vai pro fim
+      el.scrollTo({ left: max, behavior: "auto" });
+    } else if (next > max - 2) {
+      // avançar do fim → volta pro início
+      el.scrollTo({ left: 0, behavior: "auto" });
+    } else {
+      el.scrollTo({ left: next, behavior: "smooth" });
+    }
+  };
+
+  return (
+    <div className="relative">
+      {/* track */}
+      <div
+        ref={ref}
+        onMouseEnter={() => setIsHover(true)}
+        onMouseLeave={() => setIsHover(false)}
+        className="no-scrollbar flex snap-x snap-mandatory overflow-x-auto scroll-smooth"
+      >
+        {items.map((p, i) => (
+          <div key={p.title + i} className="snap-start flex-none px-2">
+            {/* 1 card ocupa 100% no mobile, 50% no md, 33% no lg */}
+            <div className="w-[90vw] sm:w-[45vw] lg:w-[30vw]">
+              <PortfolioCard p={p} />
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* setas (escondo em <md) */}
+      <button
+        onClick={() => go(-1)}
+        className="hidden md:flex absolute left-[-12px] top-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-soft bg-[rgb(var(--card))] p-2 shadow hover:opacity-90"
+        aria-label="Anterior"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        onClick={() => go(1)}
+        className="hidden md:flex absolute right-[-12px] top-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-soft bg-[rgb(var(--card))] p-2 shadow hover:opacity-90"
+        aria-label="Próximo"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    </div>
+  );
+}
+
 function Portfolio() {
+  // opcional: duplica a lista pra loop mais “cheio”
+  const items = [...WORKS, ...WORKS];
+
   return (
     <Container>
       <section id="portfolio" className="py-16 md:py-20">
-        <SectionTitle title="Portfólio"
-          subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e sofisticada." />
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {/* {WORKS.map((p) => (
-            <article key={p.title} className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]">
-              <div className="relative aspect-video overflow-hidden">
-                <img src={p.img} alt={p.title}
-                  className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]" loading="lazy" />
-              </div>
-              <div className="p-5 bg-[rgb(var(--card))]">
-                <h3 className="heading text-lg font-semibold">{p.title}</h3>
-                <p className="mt-2 text-sm text-muted">{p.desc}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {p.stack.map((s) => <span key={s} className="chip">{s}</span>)}
-                </div>
-              </div>
-            </article>
-          ))} */}
-          {WORKS.map((p) => (
-            <article
-              key={p.title}
-              className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)]"
-            >
-              <div className="relative aspect-video overflow-hidden">
-                {p.link ? (
-                  <a href={p.link} target="_blank" rel="noopener noreferrer">
-                    <img
-                      src={p.img}
-                      alt={p.title}
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                      loading="lazy"
-                    />
-                  </a>
-                ) : (
-                  <img
-                    src={p.img}
-                    alt={p.title}
-                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    loading="lazy"
-                  />
-                )}
-              </div>
-              <div className="p-5 bg-[rgb(var(--card))]">
-                <h3 className="heading text-lg font-semibold">
-                  {p.link ? <a href={p.link}>{p.title}</a> : p.title}
-                </h3>
-                <p className="mt-2 text-sm text-muted">{p.desc}</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  {p.stack.map((s) => (
-                    <span key={s} className="chip">{s}</span>
-                  ))}
-                </div>
-              </div>
-            </article>
-          ))}
-
-        </div>
+        <SectionTitle
+          title="Portfólio"
+          subtitle="Cada projeto nasce de um problema real — e termina em uma solução simples e sofisticada."
+        />
+        <Carousel items={items} />
       </section>
     </Container>
   );
@@ -526,8 +677,11 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<HomeApp />} />
-        <Route path="/exemplos/landing" element={<ExemploLanding1 />} />
+        <Route path="/exemplos/perfume" element={<ExemploLanding1 />} />
+        <Route path="/exemplos/ctrlc" element={<CursoCtrlC />} />
         <Route path="/exemplos/landing/lead" element={<LeadExemplo1 />} />
+        <Route path="/exemplos/ctrlc/mais" element={<SaibaMaisCtrlC />} />
+        <Route path="/exemplos/ctrlcv/lead" element={<LeadCtrlC />} />
       </Routes>
     </HashRouter>
   );
