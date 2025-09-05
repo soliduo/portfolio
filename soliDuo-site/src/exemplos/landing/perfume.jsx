@@ -98,17 +98,17 @@ export default function Landing() {
                         </p>
 
                         <ul className="mt-6 space-y-2 text-sm md:text-base">
-                            <li className="flex items-center gap-2">
-                                <span className="h-1.5 w-1.5 rounded-full bg-gray-800" />
-                                <strong>Fixação até 12h</strong> em condições de uso comum
+                            <li className="flex items-start gap-2">
+                                <span className="mt-2 h-1.5 w-1.5 rounded-full flex-none bg-gray-800" /><span>
+                                    <strong>Fixação até 12h</strong> em condições de uso comum
+                                </span></li>
+                            <li className="flex items-start gap-2">
+                                <span className="mt-2 h-1.5 w-1.5 rounded-full flex-none bg-gray-800" /><span>
+                                    <strong>Notas cítricas e amadeiradas</strong> — versátil do trabalho ao happy hour</span>
                             </li>
-                            <li className="flex items-center gap-2">
-                                <span className="h-1.5 w-1.5 rounded-full bg-gray-800" />
-                                <strong>Notas cítricas e amadeiradas</strong> — versátil do trabalho ao happy hour
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <span className="h-1.5 w-1.5 rounded-full bg-gray-800" />
-                                <strong>Preço acessível</strong> (pré-venda limitada)
+                            <li className="flex items-start gap-2">
+                                <span className="mt-2 h-1.5 w-1.5 rounded-full flex-none bg-gray-800" /><span>
+                                    <strong>Preço acessível</strong> (pré-venda limitada)</span>
                             </li>
                         </ul>
 

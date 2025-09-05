@@ -125,3 +125,6 @@ html { scroll-behavior: smooth; }
 
 /* Cor de superfície sólida (segue o tema light/dark) */
 .bg-app { background-color: rgb(var(--bg)); }
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
