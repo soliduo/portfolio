@@ -25,7 +25,7 @@ import "./index.css";
 import logoDark from '/logo_soliduo_preto.png';
 import logoLight from '/logo_soliduo_branco.png';
 import { FaWhatsapp } from "react-icons/fa";
-import { HashRouter, Routes, Route, Link } from "react-router-dom";
+import { HashRouter, Routes, Route, Link, useLocation } from "react-router-dom";
 import LandingPerfume from "./exemplos/landing/LandingPerfume.jsx";
 import LeadPerfume from "./exemplos/landing/lead/LeadPerfume.jsx";
 import CursoCtrlC from "./exemplos/landing/cursoCtrlC.jsx";
@@ -145,13 +145,21 @@ function getInitialMode() {
   } catch { }
   return "system";
 }
+
 function applyTheme(mode) {
   const root = document.documentElement;
   if (mode === "system") { root.removeAttribute("data-theme"); try { localStorage.removeItem("theme"); } catch { }; }
   else { root.setAttribute("data-theme", mode); try { localStorage.setItem("theme", mode); } catch { }; }
 }
 
-// 1) Crie este componente utilitário (coloque acima do Nav)
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" }); // ou "smooth" se preferir
+  }, [pathname]);
+  return null;
+}
+
 function ScrollLink({ to, className = "", children, onClick }) {
   return (
     <a
@@ -456,19 +464,56 @@ function Services() {
 //   );
 // }
 
+// function PortfolioCard({ p }) {
+//   return (
+//     <article className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)] bg-[rgb(var(--card))]">
+//       <div className="relative aspect-[3/2] overflow-hidden">
+//         {p.link ? (
+//           <Link to={p.link}>
+//             <img
+//               src={p.img}
+//               alt={p.title}
+//               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+//               loading="lazy"
+//             />
+//           </Link>
+//         ) : (
+//           <img
+//             src={p.img}
+//             alt={p.title}
+//             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+//             loading="lazy"
+//           />
+//         )}
+//       </div>
+//       <div className="p-5">
+//         <h3 className="heading text-lg font-semibold">
+//           {p.link ? <Link to={p.link}>{p.title}</Link> : p.title}
+//         </h3>
+//         <p className="mt-2 text-sm text-muted">{p.desc}</p>
+//         <div className="mt-3 flex flex-wrap gap-2">
+//           {p.stack.map((s) => (
+//             <span key={s} className="chip">{s}</span>
+//           ))}
+//         </div>
+//       </div>
+//     </article>
+//   );
+// }
+
 function PortfolioCard({ p }) {
   return (
     <article className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)] bg-[rgb(var(--card))]">
       <div className="relative aspect-[3/2] overflow-hidden">
         {p.link ? (
-          <Link to={p.link}>
+          <a href={`#${p.link}`} target="_blank" rel="noopener noreferrer">
             <img
               src={p.img}
               alt={p.title}
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
               loading="lazy"
             />
-          </Link>
+          </a>
         ) : (
           <img
             src={p.img}
@@ -480,7 +525,13 @@ function PortfolioCard({ p }) {
       </div>
       <div className="p-5">
         <h3 className="heading text-lg font-semibold">
-          {p.link ? <Link to={p.link}>{p.title}</Link> : p.title}
+          {p.link ? (
+            <a href={`#${p.link}`} target="_blank" rel="noopener noreferrer">
+              {p.title}
+            </a>
+          ) : (
+            p.title
+          )}
         </h3>
         <p className="mt-2 text-sm text-muted">{p.desc}</p>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -726,6 +777,7 @@ function HomeApp() {
 export default function App() {
   return (
     <HashRouter>
+      <ScrollToTop /> 
       <Routes>
         <Route path="/" element={<HomeApp />} />
         <Route path="/exemplos/perfume" element={<LandingPerfume />} />
