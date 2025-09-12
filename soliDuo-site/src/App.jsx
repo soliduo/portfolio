@@ -26,11 +26,11 @@ import logoDark from '/logo_soliduo_preto.png';
 import logoLight from '/logo_soliduo_branco.png';
 import { FaWhatsapp } from "react-icons/fa";
 import { HashRouter, Routes, Route, Link } from "react-router-dom";
-import ExemploLanding1 from "./exemplos/landing/perfume.jsx";
-import LeadExemplo1 from "./exemplos/landing/lead/leadPerfume.jsx";
-import CursoCtrlC from "./exemplos/landing/cursoCtrlC.tsx";
-import SaibaMaisCtrlC from "./exemplos/landing/saibaMaisCtrlC.jsx";
-import LeadCtrlC from "./exemplos/landing/lead/leadCtrlC";
+import LandingPerfume from "./exemplos/landing/LandingPerfume.jsx";
+import LeadPerfume from "./exemplos/landing/lead/LeadPerfume.jsx";
+import CursoCtrlC from "./exemplos/landing/cursoCtrlC.jsx";
+import SaibaMaisCtrlC from "./exemplos/landing/SaibaMaisCtrlC.jsx";
+import LeadCtrlC from "./exemplos/landing/lead/leadCtrlC.jsx";
 
 const BRAND = {
   name: "SoliDuo",
@@ -85,13 +85,13 @@ const WORKS = [
     title: "Landing de Produtos", desc: "Estrutura enxuta focada em conversão e captura de leads.",
     stack: ["React", "Tailwind", "Leads"],
     img: "https://img.freepik.com/fotos-premium/ultra-realista-fundo-laranja-4k-foto-hd-para-o-produto_1193781-21506.jpg?w=1480",
-    link: "#/exemplos/perfume",
+    link: "/exemplos/perfume",
   },
   {
     title: "Landing de Infoprodutos", desc: "Estrutura enxuta focada em conversão com testes A/B.",
     stack: ["React", "Tailwind", "Google Sheets"],
     img: "https://flammadesign.com.br/wp-content/uploads/2024/04/egy-connting-digital-devices-concept-scaled.webp",
-    link: "#/exemplos/ctrlc",
+    link: "/exemplos/ctrlc",
   },
   {
     title: "Convite de Casamento Digital", desc: "Página com RSVP, mapa e lista de presentes integrada.",
@@ -151,6 +151,24 @@ function applyTheme(mode) {
   else { root.setAttribute("data-theme", mode); try { localStorage.setItem("theme", mode); } catch { }; }
 }
 
+// 1) Crie este componente utilitário (coloque acima do Nav)
+function ScrollLink({ to, className = "", children, onClick }) {
+  return (
+    <a
+      href="#"
+      className={className}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick?.(e);
+        const el = document.getElementById(to);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }}
+    >
+      {children}
+    </a>
+  );
+}
+
 function Nav() {
   const [mode, setMode] = useState(getInitialMode);
   const [systemDark, setSystemDark] = useState(prefersDark());
@@ -180,22 +198,27 @@ function Nav() {
       <Container>
         <nav className="flex h-16 items-center justify-between">
           {/* logo/link */}
-          <div href="#top" className="flex items-center gap-3 text-lg font-extrabold heading" onClick={navAndClose}>
+          {/* <div href="#top" className="flex items-center gap-3 text-lg font-extrabold heading" onClick={navAndClose}>
             <img
               src={effectiveTheme === "dark" ? logoDark : logoLight}
               alt="Logo SoliDuo"
               className="h-6 w-6"
             />
             <span>Soli<span className="text-[rgb(var(--brand))]">Duo</span></span>
-          </div>
+          </div> */}
+          <a href="top" className="flex items-center gap-3 text-lg font-extrabold heading" onClick={navAndClose}>
+            <img src={effectiveTheme === "dark" ? logoDark : logoLight} alt="Logo SoliDuo" className="h-6 w-6" />
+            <span>Soli<span className="text-[rgb(var(--brand))]">Duo</span></span>
+          </a>
+
 
           {/* desktop */}
           <div className="heading hidden md:flex items-center gap-6">
-            <a href="#top" className="hover:opacity-80">Home</a>
-            <a href="#sobre" className="hover:opacity-80">Sobre Nós</a>
-            <a href="#servicos" className="hover:opacity-80">Serviços</a>
-            <a href="#portfolio" className="hover:opacity-80">Portfólio</a>
-            <a href="#contato" className="hover:opacity-80">Contato</a>
+            <a href="top" className="hover:opacity-80">Home</a>
+            <a href="sobre" className="hover:opacity-80">Sobre Nós</a>
+            <a href="servicos" className="hover:opacity-80">Serviços</a>
+            <a href="portfolio" className="hover:opacity-80">Portfólio</a>
+            <a href="contato" className="hover:opacity-80">Contato</a>
             <button onClick={cycleMode} className="rounded p-2 hover:bg-white/5" aria-label={label} title={label}>
               {themeIcon}
             </button>
@@ -223,11 +246,11 @@ function Nav() {
         <div id="mobile-menu" className="md:hidden border-t border-soft bg-[rgb(var(--bg))]">
           <Container>
             <div className="heading flex flex-col py-3">
-              <a href="#top" onClick={navAndClose} className="py-2">Home</a>
-              <a href="#sobre" onClick={navAndClose} className="py-2">Sobre Nós</a>
-              <a href="#servicos" onClick={navAndClose} className="py-2">Serviços</a>
-              <a href="#portfolio" onClick={navAndClose} className="py-2">Portfólio</a>
-              <a href="#contato" onClick={navAndClose} className="py-2">Contato</a>
+              <a href="top" onClick={navAndClose} className="py-2">Home</a>
+              <a href="sobre" onClick={navAndClose} className="py-2">Sobre Nós</a>
+              <a href="servicos" onClick={navAndClose} className="py-2">Serviços</a>
+              <a href="portfolio" onClick={navAndClose} className="py-2">Portfólio</a>
+              <a href="contato" onClick={navAndClose} className="py-2">Contato</a>
             </div>
           </Container>
         </div>
@@ -252,10 +275,10 @@ function Hero() {
             <span className="text-[rgb(var(--brand))] font-semibold"> automações de WhatsApp</span> (agendamentos e atendimento).
           </p>
           <div className="mt-6 flex flex-wrap items-center gap-3">
-            <a href="#portfolio" className="btn-primary inline-flex items-center gap-2 hover:opacity-90">
+            <a href="portfolio" className="btn-primary inline-flex items-center gap-2 hover:opacity-90">
               Ver trabalhos <ArrowRight className="h-4 w-4" />
             </a>
-            <a href="#contato" className="btn-ghost inline-flex items-center gap-2">
+            <a href="contato" className="btn-ghost inline-flex items-center gap-2">
               Orçar agora
             </a>
           </div>
@@ -432,19 +455,20 @@ function Services() {
 //     </Container>
 //   );
 // }
+
 function PortfolioCard({ p }) {
   return (
     <article className="group overflow-hidden rounded-[1.25rem] border border-soft shadow-[0_8px_30px_rgba(0,0,0,.25)] bg-[rgb(var(--card))]">
       <div className="relative aspect-[3/2] overflow-hidden">
         {p.link ? (
-          <a href={p.link}>
+          <Link to={p.link}>
             <img
               src={p.img}
               alt={p.title}
               className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
               loading="lazy"
             />
-          </a>
+          </Link>
         ) : (
           <img
             src={p.img}
@@ -456,7 +480,7 @@ function PortfolioCard({ p }) {
       </div>
       <div className="p-5">
         <h3 className="heading text-lg font-semibold">
-          {p.link ? <a href={p.link}>{p.title}</a> : p.title}
+          {p.link ? <Link to={p.link}>{p.title}</Link> : p.title}
         </h3>
         <p className="mt-2 text-sm text-muted">{p.desc}</p>
         <div className="mt-3 flex flex-wrap gap-2">
@@ -473,22 +497,26 @@ function Carousel({ items }) {
   const ref = useRef(null);
   const [isHover, setIsHover] = useState(false);
 
-  // Autoplay
   useEffect(() => {
-    if (!ref.current) return;
-    const GAP = 24; // gap-6
-    const tick = () => {
-      if (isHover) return;
-      const first = el.querySelector(":scope > * > div"); // pega o div com width %
-      if (!first) return;
-      const w = first.getBoundingClientRect().width + GAP;
-      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
-      el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + w, behavior: atEnd ? "auto" : "smooth" });
-    };
-
-    const id = setInterval(tick, 3000);
+    const id = setInterval(() => { if (!isHover) go(1); }, 3000);
     return () => clearInterval(id);
-  }, [isHover]);
+  }, [isHover]); // usa a mesma navegação do botão
+
+  // useEffect(() => {
+  //   if (!ref.current) return;
+  //   const GAP = 24; 
+  //   const tick = () => {
+  //     if (isHover) return;
+  //     const first = el.querySelector(":scope > * > div"); 
+  //     if (!first) return;
+  //     const w = first.getBoundingClientRect().width + GAP;
+  //     const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+  //     el.scrollTo({ left: atEnd ? 0 : el.scrollLeft + w, behavior: atEnd ? "auto" : "smooth" });
+  //   };
+
+  //   const id = setInterval(tick, 3000);
+  //   return () => clearInterval(id);
+  // }, [isHover]);
 
   const getStep = () => {
     const el = ref.current;
@@ -508,16 +536,17 @@ function Carousel({ items }) {
     const max = el.scrollWidth - el.clientWidth;
     const next = el.scrollLeft + dir * step;
 
-    if (next < 0) {
-      // voltar do início → vai pro fim
-      el.scrollTo({ left: max, behavior: "auto" });
-    } else if (next > max - 2) {
-      // avançar do fim → volta pro início
-      el.scrollTo({ left: 0, behavior: "auto" });
-    } else {
-      el.scrollTo({ left: next, behavior: "smooth" });
-    }
+    if (next < 0) el.scrollTo({ left: max, behavior: "auto" });
+    else if (next > max - 2) el.scrollTo({ left: 0, behavior: "auto" });
+    else el.scrollTo({ left: next, behavior: "smooth" });
   };
+
+  // autoplay usando go(1)
+  useEffect(() => {
+    const id = setInterval(() => { if (!isHover) go(1); }, 3000);
+    return () => clearInterval(id);
+  }, [isHover]);
+
 
   return (
     <div className="relative">
@@ -642,6 +671,28 @@ function Contact() {
 }
 
 function HomeApp() {
+  useEffect(() => {
+    const ids = new Set(["top", "sobre", "servicos", "portfolio", "contato"]);
+    const onClick = (e) => {
+      const a = e.target.closest('a[href]');
+      if (!a) return;
+      const href = a.getAttribute('href');
+      if (!href) return;
+
+      // Se for hash correto, ok
+      if (href.startsWith('#')) return;
+
+      // Se for interno (top/sobre/...) mas sem '#', intercepta
+      if (ids.has(href)) {
+        e.preventDefault();
+        const el = document.getElementById(href);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+    document.addEventListener('click', onClick);
+    return () => document.removeEventListener('click', onClick);
+  }, []);
+
   return (
     <div id="top" className="min-h-screen text-[rgb(var(--text))]" style={{ backgroundColor: "rgb(var(--bg))" }}>
       <Nav />
@@ -677,10 +728,10 @@ export default function App() {
     <HashRouter>
       <Routes>
         <Route path="/" element={<HomeApp />} />
-        <Route path="/exemplos/perfume" element={<ExemploLanding1 />} />
+        <Route path="/exemplos/perfume" element={<LandingPerfume />} />
         <Route path="/exemplos/ctrlc" element={<CursoCtrlC />} />
-        <Route path="/exemplos/landing/lead" element={<LeadExemplo1 />} />
-        <Route path="/exemplos/ctrlc/mais" element={<SaibaMaisCtrlC />} />
+        <Route path="/exemplos/landing/lead" element={<LeadPerfume />} />
+        <Route path="/exemplos/ctrlcv/mais" element={<SaibaMaisCtrlC />} />
         <Route path="/exemplos/ctrlcv/lead" element={<LeadCtrlC />} />
       </Routes>
     </HashRouter>

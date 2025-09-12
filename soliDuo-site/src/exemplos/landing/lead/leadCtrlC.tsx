@@ -8,7 +8,9 @@ function useQueryParams() {
   const { search } = useLocation();
   return useMemo(() => {
     const p = new URLSearchParams(search);
-    const pick = (k) => p.get(k) || "";
+    function pick(k: string): string {
+      return p.get(k) || "";
+    }
     return {
       utm_source: pick("utm_source"),
       utm_medium: pick("utm_medium"),
@@ -38,7 +40,7 @@ export default function LeadCtrlCV() {
   // foco no primeiro campo
   useEffect(() => { document.getElementById("nome")?.focus(); }, []);
 
-  const onChange = (e) => {
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type, checked } = e.target;
     setForm((f) => ({ ...f, [name]: type === "checkbox" ? checked : value }));
   };
@@ -54,7 +56,7 @@ export default function LeadCtrlCV() {
     return Object.keys(errs).length === 0;
   };
 
-  const onSubmit = async (e) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!validate()) return;
     if (!SHEETS_ENDPOINT || SHEETS_ENDPOINT.startsWith("COLE_AQUI")) {

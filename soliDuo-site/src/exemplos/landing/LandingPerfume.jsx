@@ -73,7 +73,7 @@ function Countdown({ targetISO }) {
     );
 }
 
-export default function Landing() {
+export default function LandingPerfume() {
     const launchDate = new Date(LAUNCH_ISO).toLocaleString("pt-BR", {
         dateStyle: "long",
         timeStyle: "short",
