@@ -9,7 +9,7 @@ const saveLead = (lead) => {
   localStorage.setItem(key, JSON.stringify(current));
 };
 
-export default function Lead() {
+export default function LeadPerfume() {
   const navigate = useNavigate();
   const [form, setForm] = useState({ nome: "", email: "", telefone: "", consent: true });
   const [errors, setErrors] = useState({});
